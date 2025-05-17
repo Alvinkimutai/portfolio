@@ -1,26 +1,59 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+    <Navbar />
+    <main class="container mx-auto px-4 py-8">
+      <Hero />
+      <About />
+      <Skills />
+      <Experience />
+      <Education />
+      <Projects />
+      <Contact />
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/Navbar.vue'
+import Hero from './components/Hero.vue'
+import About from './components/About.vue'
+import Skills from './components/Skills.vue'
+import Experience from './components/Experience.vue'
+import Education from './components/Education.vue'
+import Projects from './components/Projects.vue'
+import Contact from './components/Contact.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar,
+    Hero,
+    About,
+    Skills,
+    Experience,
+    Education,
+    Projects,
+    Contact,
+    Footer
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.section-title {
+  @apply text-3xl font-bold mb-8 text-center;
+  background: linear-gradient(to right, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>
