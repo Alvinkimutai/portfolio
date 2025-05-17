@@ -1,5 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+  <div v-if="isLoading" class="min-h-screen bg-gray-900 flex items-center justify-center">
+  <div class="text-center">
+    <div ref="spinnerContainer" class="mb-4 flex justify-center"></div>
+    <p class="text-blue-400 text-xl">Loading ...</p>
+  </div>
+  </div>
+  <div v-else class="min-h-screen bg-gray-900 relative text-white">
     <Navbar />
     <main class="container mx-auto px-4 py-8">
       <Hero />
@@ -24,6 +30,7 @@ import Education from './components/Education.vue'
 import Projects from './components/Projects.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
+import { quantum } from 'ldrs'
 
 export default {
   name: 'App',
@@ -37,6 +44,28 @@ export default {
     Projects,
     Contact,
     Footer
+  },
+  data() {
+    return {
+      isLoading: true
+    }
+  },
+    mounted() {
+    // Register the dot spinner
+    quantum.register()
+    
+    // Create and add the spinner element
+    const spinner = document.createElement('l-quantum')
+    spinner.setAttribute('size', '55')
+    spinner.setAttribute('speed', '1.75')
+    spinner.setAttribute('color', '#38bdf8') // Use your blue color
+    
+    this.$refs.spinnerContainer.appendChild(spinner)
+    
+    // Simulate loading time
+    setTimeout(() => {
+      this.isLoading = false
+    }, 2000)
   }
 }
 </script>
