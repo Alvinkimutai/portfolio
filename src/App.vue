@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="min-h-screen bg-gray-900 flex items-center justify-center">
   <div class="text-center">
     <div ref="spinnerContainer" class="mb-4 flex justify-center"></div>
-    <p class="text-blue-400 text-xl">Loading ...</p>
+    <p class="text-blue-400 text-2xl font-bold mt-4">{{ countdownText }}</p>
   </div>
   </div>
   <div v-else class="min-h-screen bg-gray-900 relative text-white">
@@ -47,7 +47,9 @@ export default {
   },
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      countdown: 3,
+      countdownText: ''
     }
   },
     mounted() {
@@ -62,10 +64,34 @@ export default {
     
     this.$refs.spinnerContainer.appendChild(spinner)
     
-    // Simulate loading time
-    setTimeout(() => {
-      this.isLoading = false
-    }, 2000)
+    // Start countdown
+    this.startCountdown()
+  },
+  
+  methods: {
+    startCountdown() {
+      // Initial countdown text
+      this.countdownText = `Loading in ${this.countdown}...`
+      
+      // Set up countdown interval
+      const countdownInterval = setInterval(() => {
+        this.countdown -= 1
+        
+        if (this.countdown <= 0) {
+          // Clear the interval when countdown reaches 0
+          clearInterval(countdownInterval)
+          this.countdownText = 'Welcome!'
+          
+          // Show the main content after a brief pause
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
+        } else {
+          // Update countdown text
+          this.countdownText = `Loading in ${this.countdown}...`
+        }
+      }, 1000)
+    }
   }
 }
 </script>
